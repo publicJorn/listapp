@@ -1,58 +1,57 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { ListDto, CreateListDto, UpdateListDto } from './dto/list.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { CreateListDto, UpdateListDto } from './dto/list.dto'
+import { List } from './entities/list.entity'
 
 @Injectable()
 export class ListsService {
-  private readonly lists: ListDto[] = [{ id: 1, title: 'Boodschappen' }]
+  constructor(
+    @InjectRepository(List)
+    private listRepo: Repository<List>,
+  ) {}
 
-  create(createListDto: CreateListDto) {
-    const highestId = this.lists.reduce(
-      (highest, current) => (current.id > highest ? current.id : highest),
-      1,
-    )
-
-    const list = new ListDto()
-    list.id = highestId + 1
-    list.title = createListDto.title
-
-    this.lists.push(list)
-    return 'List created'
+  async findAll() {
+    return await this.listRepo.find()
   }
 
-  findAll() {
-    return this.lists
-  }
-
-  findOne(id: number) {
-    const list = this.lists.filter((list) => list.id === id)
+  async findOne(id: number) {
+    const list = await this.listRepo.findOneBy({ id })
 
     if (!list) {
       throw new NotFoundException(`List ${id} not found`)
     }
-
     return list
   }
 
-  update(id: number, listDto: UpdateListDto) {
-    const idx = this.lists.findIndex((list) => list.id === id)
-    const list = this.lists[idx]
+  async create(createListDto: CreateListDto) {
+    const list = new List()
+    list.title = createListDto.title.trim()
+
+    await this.listRepo.save(list)
+    return 'List created'
+  }
+
+  async update(id: number, listDto: UpdateListDto) {
+    listDto.title = listDto.title.trim()
+
+    const list = await this.listRepo.findOneBy({ id })
 
     if (!list) {
       throw new NotFoundException(`List ${id} not found`)
     }
 
-    this.lists.splice(idx, 1, { ...list, ...listDto })
+    await this.listRepo.save({ ...list, ...listDto })
     return `List ${id} updated`
   }
 
-  remove(id: number) {
-    const idx = this.lists.findIndex((list) => list.id === id)
+  async remove(id: number) {
+    const report = await this.listRepo.delete(id)
 
-    if (!idx) {
+    if (!report.affected) {
       throw new NotFoundException(`List ${id} not found`)
     }
 
-    this.lists.splice(idx, 1)
     return `List ${id} removed`
   }
 }

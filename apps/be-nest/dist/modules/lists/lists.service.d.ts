@@ -1,9 +1,12 @@
-import { ListDto, CreateListDto, UpdateListDto } from './dto/list.dto';
+import { Repository } from 'typeorm';
+import { CreateListDto, UpdateListDto } from './dto/list.dto';
+import { List } from './entities/list.entity';
 export declare class ListsService {
-    private readonly lists;
-    create(createListDto: CreateListDto): string;
-    findAll(): ListDto[];
-    findOne(id: number): ListDto[];
-    update(id: number, listDto: UpdateListDto): string;
-    remove(id: number): string;
+    private listRepo;
+    constructor(listRepo: Repository<List>);
+    findAll(): Promise<List[]>;
+    findOne(id: number): Promise<List>;
+    create(createListDto: CreateListDto): Promise<string>;
+    update(id: number, listDto: UpdateListDto): Promise<string>;
+    remove(id: number): Promise<string>;
 }

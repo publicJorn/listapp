@@ -20,14 +20,14 @@ let ListsController = exports.ListsController = class ListsController {
     constructor(listsService) {
         this.listsService = listsService;
     }
-    create(createListDto) {
-        return this.listsService.create(createListDto);
-    }
     findAll() {
         return this.listsService.findAll();
     }
     findOne(id) {
         return this.listsService.findOne(+id);
+    }
+    create(createListDto) {
+        return this.listsService.create(createListDto);
     }
     update(id, updateListDto) {
         return this.listsService.update(+id, updateListDto);
@@ -36,13 +36,6 @@ let ListsController = exports.ListsController = class ListsController {
         return this.listsService.remove(+id);
     }
 };
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [list_dto_1.CreateListDto]),
-    __metadata("design:returntype", void 0)
-], ListsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -57,11 +50,18 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ListsController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [list_dto_1.CreateListDto]),
+    __metadata("design:returntype", void 0)
+], ListsController.prototype, "create", null);
+__decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, list_dto_1.ListDto]),
+    __metadata("design:paramtypes", [Number, list_dto_1.UpdateListDto]),
     __metadata("design:returntype", void 0)
 ], ListsController.prototype, "update", null);
 __decorate([

@@ -1,6 +1,8 @@
 import { IsNumber, IsPositive, IsString, IsNotEmpty } from 'class-validator'
 import { OmitType } from '@nestjs/mapped-types'
 
+// Currently not used anywhere else
+// TODO: Still figuring out if `id` should be part of DTO, or only the entity
 export class ListDto {
   @IsNumber()
   @IsPositive()

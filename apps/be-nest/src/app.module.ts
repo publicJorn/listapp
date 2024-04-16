@@ -1,15 +1,29 @@
 import { APP_PIPE } from '@nestjs/core'
-import { Module, ValidationPipe } from '@nestjs/common'
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import config, { Config } from './config'
 import { ListsModule } from './modules/lists/lists.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { requestLogger } from './common/loggers/request-logger.middleware'
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [config],
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'secret',
+      database: 'listapp',
+      autoLoadEntities: true,
+      // Indicates if database schema should be auto created on every application launch.
+      // Be careful with this option and don't use this in production
+      synchronize: true,
     }),
     ListsModule,
   ],
@@ -24,4 +38,8 @@ import { AppService } from './app.service'
 })
 export class AppModule {
   constructor(private configService: ConfigService<Config>) {}
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(requestLogger).forRoutes('*')
+  }
 }

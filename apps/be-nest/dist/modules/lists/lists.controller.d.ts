@@ -1,11 +1,11 @@
 import { ListsService } from './lists.service';
-import { ListDto, CreateListDto } from './dto/list.dto';
+import { CreateListDto, UpdateListDto } from './dto/list.dto';
 export declare class ListsController {
     private readonly listsService;
     constructor(listsService: ListsService);
-    create(createListDto: CreateListDto): string;
-    findAll(): ListDto[];
-    findOne(id: number): ListDto[];
-    update(id: number, updateListDto: ListDto): string;
-    remove(id: number): string;
+    findAll(): Promise<import("./entities/list.entity").List[]>;
+    findOne(id: number): Promise<import("./entities/list.entity").List>;
+    create(createListDto: CreateListDto): Promise<string>;
+    update(id: number, updateListDto: UpdateListDto): Promise<string>;
+    remove(id: number): Promise<string>;
 }

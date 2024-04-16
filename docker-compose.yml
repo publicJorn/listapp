@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: listapp-mysql
+    image: mariadb:11.3
+    platform: linux/arm64/v8
+    command: --default-authentication-plugin=myql_native_passsword
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: listapp
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3900:8080
+
+volumes:
+  mysql:
+    driver: local
+    name: listapp-data

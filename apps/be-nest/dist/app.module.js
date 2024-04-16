@@ -13,13 +13,18 @@ exports.AppModule = void 0;
 const core_1 = require("@nestjs/core");
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const typeorm_1 = require("@nestjs/typeorm");
 const config_2 = require("./config");
 const lists_module_1 = require("./modules/lists/lists.module");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const request_logger_middleware_1 = require("./common/loggers/request-logger.middleware");
 let AppModule = exports.AppModule = class AppModule {
     constructor(configService) {
         this.configService = configService;
+    }
+    configure(consumer) {
+        consumer.apply(request_logger_middleware_1.requestLogger).forRoutes('*');
     }
 };
 exports.AppModule = AppModule = __decorate([
@@ -27,6 +32,16 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 load: [config_2.default],
+            }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mysql',
+                host: 'localhost',
+                port: 3306,
+                username: 'root',
+                password: 'secret',
+                database: 'listapp',
+                autoLoadEntities: true,
+                synchronize: true,
             }),
             lists_module_1.ListsModule,
         ],
