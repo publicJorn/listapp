@@ -3,7 +3,10 @@ import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import config, { Config } from './config'
+
 import { ListsModule } from './modules/lists/lists.module'
+import { ItemsModule } from './modules/items/items.module'
+
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { requestLogger } from './common/loggers/request-logger.middleware'
@@ -21,11 +24,12 @@ import { requestLogger } from './common/loggers/request-logger.middleware'
       password: 'secret',
       database: 'listapp',
       autoLoadEntities: true,
-      // Indicates if database schema should be auto created on every application launch.
+      // Indicates if database should be re-created on every application launch.
       // Be careful with this option and don't use this in production
       synchronize: true,
     }),
     ListsModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -16,6 +16,7 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const config_2 = require("./config");
 const lists_module_1 = require("./modules/lists/lists.module");
+const items_module_1 = require("./modules/items/items.module");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const request_logger_middleware_1 = require("./common/loggers/request-logger.middleware");
@@ -44,6 +45,7 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: true,
             }),
             lists_module_1.ListsModule,
+            items_module_1.ItemsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

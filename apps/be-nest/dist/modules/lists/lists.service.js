@@ -25,7 +25,7 @@ let ListsService = exports.ListsService = class ListsService {
         return await this.listRepo.find();
     }
     async findOne(id) {
-        const list = await this.listRepo.findOneBy({ id });
+        const list = await this.listRepo.findOne({ where: { id }, relations: { items: true } });
         if (!list) {
             throw new common_1.NotFoundException(`List ${id} not found`);
         }

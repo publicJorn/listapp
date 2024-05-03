@@ -13,7 +13,7 @@ export class ListsController {
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.listsService.findOne(+id)
+    return this.listsService.findOne(id)
   }
 
   @Post()
@@ -23,11 +23,11 @@ export class ListsController {
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateListDto: UpdateListDto) {
-    return this.listsService.update(+id, updateListDto)
+    return this.listsService.update(id, updateListDto)
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.listsService.remove(+id)
+    return this.listsService.remove(id)
   }
 }

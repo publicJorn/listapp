@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const list_entity_1 = require("./entities/list.entity");
+const item_entity_1 = require("../items/entities/item.entity");
 const lists_service_1 = require("./lists.service");
 const lists_controller_1 = require("./lists.controller");
 let ListsModule = exports.ListsModule = class ListsModule {
@@ -23,7 +24,7 @@ let ListsModule = exports.ListsModule = class ListsModule {
 };
 exports.ListsModule = ListsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([list_entity_1.List])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([list_entity_1.List, item_entity_1.Item])],
         controllers: [lists_controller_1.ListsController],
         providers: [lists_service_1.ListsService],
     }),

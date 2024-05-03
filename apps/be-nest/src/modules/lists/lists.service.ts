@@ -16,7 +16,7 @@ export class ListsService {
   }
 
   async findOne(id: number) {
-    const list = await this.listRepo.findOneBy({ id })
+    const list = await this.listRepo.findOne({ where: { id }, relations: { items: true } })
 
     if (!list) {
       throw new NotFoundException(`List ${id} not found`)

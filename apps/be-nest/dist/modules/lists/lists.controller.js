@@ -24,16 +24,16 @@ let ListsController = exports.ListsController = class ListsController {
         return this.listsService.findAll();
     }
     findOne(id) {
-        return this.listsService.findOne(+id);
+        return this.listsService.findOne(id);
     }
     create(createListDto) {
         return this.listsService.create(createListDto);
     }
     update(id, updateListDto) {
-        return this.listsService.update(+id, updateListDto);
+        return this.listsService.update(id, updateListDto);
     }
     remove(id) {
-        return this.listsService.remove(+id);
+        return this.listsService.remove(id);
     }
 };
 __decorate([
