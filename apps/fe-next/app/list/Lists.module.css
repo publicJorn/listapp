@@ -1,0 +1,13 @@
+.allLists {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding-inline: 0;
+  padding-block: .5rem;
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+.aList {
+  white-space: nowrap;
+}

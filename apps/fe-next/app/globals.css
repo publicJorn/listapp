@@ -1,0 +1,23 @@
+:root {
+  --font-size-text: 1.125rem;
+  --font-size-h1: 1.5rem;
+  --font-size-h2: 1.25rem;
+  --font-size-h3: 1.125rem;
+
+  --color-text: #1f1d21;
+  --color-text-light: #b0b1b2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  font-size: var(--font-size-text);
+  color: var(--color-text);
+}
+
+button {
+  font-size: var(--font-size-text);
+}

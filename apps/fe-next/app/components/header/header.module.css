@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-block-end: 1rem;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-h1);
+}
