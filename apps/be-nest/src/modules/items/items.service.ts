@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { CreateItemDto, UpdateItemDto } from './dto/item.dto'
+import { ItemCreateDto, ItemUpdateDto } from 'dto'
 import { Item } from './entities/item.entity'
 
 @Injectable()
@@ -29,17 +29,12 @@ export class ItemsService {
     return item
   }
 
-  async create(createItemDto: CreateItemDto) {
-    const item = new Item()
-    item.title = createItemDto.title.trim()
-
-    await this.itemRepo.save(item)
-    return 'Item created'
+  async create(createItemDto: ItemCreateDto) {
+    const item = await this.itemRepo.save(createItemDto)
+    return `Item created (${item.id})`
   }
 
-  async update(id: number, itemDto: UpdateItemDto) {
-    itemDto.title = itemDto.title.trim()
-
+  async update(id: number, itemDto: ItemUpdateDto) {
     const item = await this.itemRepo.findOneBy({ id })
 
     if (!item) {

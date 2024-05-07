@@ -1,8 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { IList as ListType } from 'dto'
 import { Item } from '../../items/entities/item.entity'
 
 @Entity()
-export class List {
+export class List implements ListType {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -11,6 +12,7 @@ export class List {
 
   @Column({
     length: 60,
+    nullable: false,
   })
   title: string
 }

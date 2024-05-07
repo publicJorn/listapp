@@ -1,8 +1,8 @@
-import type { Item } from '@/types'
+import type { IItem } from 'dto'
 import style from './Items.module.css'
 
 export type ItemsProps = {
-  items: Item[]
+  items: IItem[]
 }
 
 export function Items({ items }: ItemsProps) {

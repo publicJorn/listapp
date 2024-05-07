@@ -1,9 +1,10 @@
+// This DTO is currently NOT USED in favour of the `dto` package
+// It is still here for future reference
+// - Instead of a zod-typed package, I may generate types based on OpenAPI spec later...
 import { IsNumber, IsPositive, IsString, IsNotEmpty } from 'class-validator'
 import { OmitType } from '@nestjs/mapped-types'
 
-// Currently not used anywhere else
-// TODO: Still figuring out if `id` should be part of DTO, or only the entity
-export class ListDto {
+export class List {
   @IsNumber()
   @IsPositive()
   id: number
@@ -13,6 +14,4 @@ export class ListDto {
   title: string
 }
 
-export class CreateListDto extends OmitType(ListDto, ['id'] as const) {}
-
-export class UpdateListDto extends OmitType(ListDto, ['id'] as const) {}
+export class ListDto extends OmitType(List, ['id'] as const) {}

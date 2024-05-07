@@ -1,8 +1,8 @@
-import type { List } from '@/types'
+import type { IList } from 'dto'
 import style from './Lists.module.css'
 
 type ListsProps = {
-  lists: List[]
+  lists: IList[]
 }
 
 export function Lists({ lists }: ListsProps) {

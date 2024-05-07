@@ -8,9 +8,11 @@ import {
   Delete,
   ParseIntPipe,
   Query,
+  UsePipes,
 } from '@nestjs/common'
+import { itemCreateDtoSchema, itemUpdateDtoSchema, ItemCreateDto, ItemUpdateDto } from 'dto'
 import { ItemsService } from './items.service'
-import { CreateItemDto, UpdateItemDto } from './dto/item.dto'
+import { ZodValidationPipe } from 'src/common/pipes/ZodValidation.pipe'
 
 @Controller('items')
 export class ItemsController {
@@ -30,12 +32,17 @@ export class ItemsController {
   }
 
   @Post()
-  create(@Body() createItemDto: CreateItemDto) {
+  @UsePipes(new ZodValidationPipe(itemCreateDtoSchema))
+  create(@Body() createItemDto: ItemCreateDto) {
     return this.itemsService.create(createItemDto)
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateItemDto: UpdateItemDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    // Here adding pipe only for @Body, where it is needed. This prevents having to
+    @Body(new ZodValidationPipe(itemUpdateDtoSchema)) updateItemDto: ItemUpdateDto,
+  ) {
     return this.itemsService.update(id, updateItemDto)
   }
 

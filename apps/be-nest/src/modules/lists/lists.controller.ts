@@ -1,6 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+  ParseIntPipe,
+  UsePipes,
+} from '@nestjs/common'
 import { ListsService } from './lists.service'
-import { CreateListDto, UpdateListDto } from './dto/list.dto'
+import { listDtoSchema, ListDto } from 'dto'
+import { ZodValidationPipe } from 'src/common/pipes/ZodValidation.pipe'
 
 @Controller('lists')
 export class ListsController {
@@ -17,12 +28,17 @@ export class ListsController {
   }
 
   @Post()
-  create(@Body() createListDto: CreateListDto) {
+  @UsePipes(new ZodValidationPipe(listDtoSchema))
+  create(@Body() createListDto: ListDto) {
     return this.listsService.create(createListDto)
   }
 
-  @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateListDto: UpdateListDto) {
+  @Put(':id')
+  // @UsePipes with ZodValidationPipe would also run it for @Param, which is not what we want
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(new ZodValidationPipe(listDtoSchema)) updateListDto: ListDto,
+  ) {
     return this.listsService.update(id, updateListDto)
   }
 

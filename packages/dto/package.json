@@ -1,0 +1,15 @@
+{
+  "name": "dto",
+  "version": "0.1.0",
+  "description": "DTO & types for ListApp",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "zod": "3.23.6"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+  }
+}

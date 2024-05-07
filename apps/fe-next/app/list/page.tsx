@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import classNames from 'classnames'
-import type { Item, List } from '@/types'
+import type { IList, IItem } from 'dto'
 import { Header } from '@/app/components/header/Header'
 import { getLists, getItems } from '@/app/api'
 import { Items } from './Items'
@@ -20,8 +20,8 @@ export default async function List({ searchParams }: ListProps) {
 
   const lists = await getLists()
 
-  let items: Item[] = []
-  let currentList: List | undefined = undefined
+  let items: IItem[] = []
+  let currentList: IList | undefined = undefined
 
   if (id) {
     currentList = lists.find((list) => list.id === id)

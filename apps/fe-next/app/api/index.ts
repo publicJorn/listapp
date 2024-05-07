@@ -1,8 +1,8 @@
-import type { List, Item } from '@/types'
+import type { IList, IItem } from 'dto'
 
 const API = 'http://localhost:4001'
 
-export async function getLists(): Promise<List[]> {
+export async function getLists(): Promise<IList[]> {
   const res = await fetch(`${API}/lists`)
 
   if (!res.ok) {
@@ -12,7 +12,7 @@ export async function getLists(): Promise<List[]> {
   return res.json()
 }
 
-export async function getItems(listId: number): Promise<Item[]> {
+export async function getItems(listId: number): Promise<IItem[]> {
   if (listId === 0) return []
 
   const res = await fetch(`${API}/items?listId=${listId}`)

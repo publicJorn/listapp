@@ -26,6 +26,7 @@ import { requestLogger } from './common/loggers/request-logger.middleware'
       autoLoadEntities: true,
       // Indicates if database should be re-created on every application launch.
       // Be careful with this option and don't use this in production
+      // TODO: remove when done playing :)
       synchronize: true,
     }),
     ListsModule,
