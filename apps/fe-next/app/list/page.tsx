@@ -44,7 +44,7 @@ export default async function List({ searchParams }: ListProps) {
           <p className={style.watermark}>Add a list to get started!</p>
         )}
       </main>
-      <Lists lists={lists} />
+      <Lists lists={lists} activeId={id} />
       <ListActions />
     </div>
   )

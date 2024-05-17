@@ -11,3 +11,12 @@
 .aList {
   white-space: nowrap;
 }
+
+.listLink {
+  text-decoration: none;
+  color: var(--color-text);
+
+  &.active {
+    font-weight: var(--font-weight-bold);
+  }
+}
