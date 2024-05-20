@@ -29,7 +29,7 @@ export class ListsService {
     list.title = createListDto.title
 
     await this.listRepo.save(list)
-    return 'List created'
+    return { success: 'List created' }
   }
 
   async update(id: number, listDto: ListDto) {
@@ -42,7 +42,7 @@ export class ListsService {
     }
 
     await this.listRepo.save({ ...list, ...listDto })
-    return `List ${id} updated`
+    return { success: `List ${id} updated` }
   }
 
   async remove(id: number) {
@@ -52,6 +52,6 @@ export class ListsService {
       throw new NotFoundException(`List ${id} not found`)
     }
 
-    return `List ${id} removed`
+    return { success: `List ${id} removed` }
   }
 }

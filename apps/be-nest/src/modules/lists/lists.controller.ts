@@ -8,6 +8,8 @@ import {
   Delete,
   ParseIntPipe,
   UsePipes,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common'
 import { ListsService } from './lists.service'
 import { listDtoSchema, ListDto } from 'dto'
@@ -43,6 +45,7 @@ export class ListsController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.listsService.remove(id)
   }

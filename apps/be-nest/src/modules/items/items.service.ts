@@ -31,7 +31,7 @@ export class ItemsService {
 
   async create(createItemDto: ItemCreateDto) {
     const item = await this.itemRepo.save(createItemDto)
-    return `Item created (${item.id})`
+    return item
   }
 
   async update(id: number, itemDto: ItemUpdateDto) {
@@ -41,8 +41,8 @@ export class ItemsService {
       throw new NotFoundException(`Item ${id} not found`)
     }
 
-    await this.itemRepo.save({ ...item, ...itemDto })
-    return `Item ${id} updated`
+    const updatedItem = await this.itemRepo.save({ ...item, ...itemDto })
+    return updatedItem
   }
 
   async remove(id: number) {
@@ -51,7 +51,5 @@ export class ItemsService {
     if (!report.affected) {
       throw new NotFoundException(`Item ${id} not found`)
     }
-
-    return `Item ${id} removed`
   }
 }
