@@ -45,7 +45,7 @@ export default async function List({ searchParams }: ListProps) {
         )}
       </main>
       <Lists lists={lists} activeId={id} />
-      <ListActions />
+      <ListActions listId={id} />
     </div>
   )
 }

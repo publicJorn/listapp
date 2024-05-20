@@ -1,14 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
+  --font-family-body: "Open Sans", sans-serif;
+
   --font-size-text: 1.125rem;
+  --font-size-small: 0.75rem;
   --font-size-h1: 1.5rem;
   --font-size-h2: 1.25rem;
   --font-size-h3: 1.125rem;
 
   --font-weight-bold: 600;
 
+  --color-background: #fff;
   --color-text: #1f1d21;
   --color-text-light: #b0b1b2;
+  
+  --color-danger: #cc1111;
+
+  /* TODO: Invert colours for dark mode */
 }
+
+/* Mini normalisation --- */
 
 * {
   box-sizing: border-box;
@@ -16,10 +28,37 @@
 
 html, body {
   margin: 0;
+  font-family: var(--font-family-body);
   font-size: var(--font-size-text);
+  line-height: 1.5;
   color: var(--color-text);
 }
 
-button {
+h1 {
+  margin: min(calc(var(--font-size-h1) / 3 * 2), 0.5rem) 0;
+}
+
+h2 {
+  margin: min(calc(var(--font-size-h2) / 3 * 2), 0.5rem) 0;
+}
+
+h3 {
+  margin: min(calc(var(--font-size-h3) / 3 * 2), 0.5rem) 0;
+}
+
+p {
+  margin: 0.5rem 0;
+}
+
+input, textarea, button {
+  font-family: var(--font-family-body);
   font-size: var(--font-size-text);
+  line-height: 1.5;
+}
+
+/* TODO: move to specific form elements */
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: 0 .25rem;
 }

@@ -9,7 +9,7 @@ export function Header({ title }: HeaderProps) {
   return (
     <header className={style.header}>
       <Image
-        src="https://dummyimage.com/32x32/56CCF2/121212.png&text=LA"
+        src="https://dummyimage.com/48x48/56CCF2/121212.png&text=LA"
         alt="ListApp"
         width={32}
         height={32}

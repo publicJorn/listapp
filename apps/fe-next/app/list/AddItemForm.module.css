@@ -1,0 +1,22 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.header {}
+
+.form {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;  
+  gap: .5rem;
+  overflow: auto;
+  align-items: flex-start;
+}
+
+.error {
+  font-size: var(--font-size-small);
+  color: var(--color-danger);
+}
