@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const itemSchema = z.object({
   id: z.number().positive(),
   listId: z.number().positive(),
-  title: z.string().trim(),
+  title: z.string().trim().min(1, 'Title is required'),
   description: z.string().trim().optional(),
   checked: z.boolean().default(false),
 })
