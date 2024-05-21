@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { AddItemForm } from './AddItemForm'
+import { AddItemForm } from '../addItemForm/AddItemForm'
 
 import 'react-modern-drawer/dist/index.css'
 import style from './ListActions.module.css'

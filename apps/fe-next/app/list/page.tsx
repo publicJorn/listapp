@@ -1,11 +1,11 @@
-import { notFound } from 'next/navigation'
 import classNames from 'classnames'
 import type { IList, IItem } from 'dto'
 import { Header } from '@/app/components/header/Header'
-import { getLists, getItems } from '@/app/api'
-import { Items } from './Items'
-import { Lists } from './Lists'
-import { ListActions } from './ListActions'
+import { getLists, getItems } from './actions'
+import { Items } from './components/items/Items'
+import { Lists } from './components/lists/Lists'
+import { ListActions } from './components/listActions/ListActions'
+
 import baseStyle from '@/app/base.module.css'
 import style from './page.module.css'
 
