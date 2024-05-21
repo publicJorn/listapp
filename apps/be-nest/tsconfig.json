@@ -8,7 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "module": "commonjs",
-    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "outDir": "./dist",
     "removeComments": true,

@@ -51,3 +51,38 @@ export async function addItem(newItem: ItemCreateDto) {
     return `There was an error`
   }
 }
+
+export async function check(formData: FormData) {
+  try {
+    const itemId = formData.get('itemId')
+    const checked = !!formData.get('checked')
+
+    if (!itemId) {
+      throw new Error('No item id')
+    }
+
+    const res = await fetch(`${API}/items/${itemId}`, {
+      method: 'PATCH',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ checked }),
+    })
+
+    const body = await res.json()
+
+    if (!res.ok) {
+      return body.message
+    }
+
+    const listId = formData.get('listId')
+    const query = listId ? `?listId=${listId}` : ''
+    revalidatePath(`/items${query}`)
+
+    return ''
+  } catch (err) {
+    console.error(err)
+    return 'There was an error'
+  }
+}

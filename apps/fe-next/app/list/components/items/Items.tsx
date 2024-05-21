@@ -1,4 +1,6 @@
 import type { IItem } from 'dto'
+import { Item } from './Item'
+
 import style from './Items.module.css'
 
 export type ItemsProps = {
@@ -9,9 +11,7 @@ export function Items({ items }: ItemsProps) {
   return (
     <ul className={style.items}>
       {items.map((item) => (
-        <li key={item.id} className={style.item}>
-          {item.title}
-        </li>
+        <Item as="li" key={item.id} item={item} />
       ))}
     </ul>
   )
