@@ -44,7 +44,7 @@ export async function addItem(newItem: ItemCreateDto) {
       return body.message
     }
 
-    revalidatePath('/list')
+    revalidatePath(`/list/${newItem.listId}`)
     return ''
   } catch (err) {
     console.error(err)
@@ -77,8 +77,9 @@ export async function check(formData: FormData) {
     }
 
     const listId = formData.get('listId')
-    const query = listId ? `?listId=${listId}` : ''
-    revalidatePath(`/items${query}`)
+    if (listId && Number(listId)) {
+      revalidatePath(`/item/${listId}`)
+    }
 
     return ''
   } catch (err) {
