@@ -12,9 +12,9 @@ export function Lists({ lists, activeId }: ListsProps) {
   return (
     <ul className={style.allLists}>
       {lists.map((list) => (
-        <li className={style.aList}>
+        <li className={style.aList} key={`list${list.id}`}>
           <Link
-            href={`/list?id=${list.id}`}
+            href={`/list/${list.id}`}
             className={classNames(style.listLink, {
               [style.active]: activeId === list.id,
             })}

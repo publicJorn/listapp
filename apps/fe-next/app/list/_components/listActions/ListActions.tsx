@@ -27,16 +27,21 @@ export function ListActions({ listId }: Props) {
 
   return (
     <section className={style.wrapper}>
-      <button onClick={handleClick}>Add item</button>
-      <Drawer
-        open={showAddItem}
-        onClose={() => setShowAddItem(false)}
-        direction="bottom"
-        size={280}
-        className={style.drawer}
-      >
-        <AddItemForm listId={listId} afterSuccessfulSubmit={handleSubmit} />
-      </Drawer>
+      <button onClick={handleClick} disabled={!listId}>
+        Add item
+      </button>
+
+      {!!listId && (
+        <Drawer
+          open={showAddItem}
+          onClose={() => setShowAddItem(false)}
+          direction="bottom"
+          size={280}
+          className={style.drawer}
+        >
+          <AddItemForm listId={listId} afterSuccessfulSubmit={handleSubmit} />
+        </Drawer>
+      )}
     </section>
   )
 }
